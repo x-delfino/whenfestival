@@ -80,7 +80,7 @@ export default function Home({ FestivalData }) {
 
         <div className="grid">
 	  {FestivalData.map(({ id, name, url, start, end, country, address, flag, maps, image, image_black }) => (
-            <a href={url} className="card">
+            <a href={url} className="card max-w-2xl">
 	      <div className="inline-block align-middle py-4 w-3/12 text-center">
 		<Image
 		  src={image}
@@ -100,22 +100,22 @@ export default function Home({ FestivalData }) {
 		</p>
 	      </div>
 	      <div className="inline-block align-middle p-2 w-9/12">
-		<p className="float-right text-sm md:text-lg lg:text-xl"> {country} &nbsp; {flag} </p>
-	        <p className="font-bold text-2xl md:text-3xl lg:text-4xl">{name}</p>
-	        <p className="text-sm md:text-base lg:text-lg">
+		<p className="float-right text-xs sm:text-sm md:text-lg lg:text-xl"> {country} &nbsp; {flag} </p>
+	        <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">{name}</p>
+	        <p className="text-xs md:text-base lg:text-lg">
 	          {parseDate(start)} - {parseDate(end)}
 		  <br/>
         	  {daysBetween(start,end) + 1} day/s long
 		  <br/>
+		  {address}&nbsp;
+	          <a
+		    className="inline underline"
+		    href={maps}
+		    target="_blank"
+		  >
+	            (Maps)
+		  </a>
 		</p>
-		<p className="inline">{address}&nbsp;</p>
-	        <a
-		  className="inline underline"
-		  href={maps}
-		  target="_blank"
-		>
-	          (Maps)
-		</a>
 	      </div>
 	    </a>
 	  ))}
