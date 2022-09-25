@@ -1,10 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faSun,faMoon } from '@fortawesome/free-regular-svg-icons'
-import { useTheme } from 'next-themes'
+import Head from 'next/head';
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faSun,faMoon } from '@fortawesome/free-regular-svg-icons';
+import { useTheme } from 'next-themes';
+import CountdownTimer from '../components/CountdownTimer';
 
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 const config = require("../config");
@@ -40,11 +41,11 @@ export function parseDate(DateVar) {
 }
 
 function daysBetween(StartDate, EndDate) {
-  var start = new Date(StartDate);
-  var end = new Date(EndDate);
-  return (Math.round((end.getTime() - start.getTime()) / (1000 * 3600 * 24)));
+  const start = new Date(StartDate);
+  const end = new Date(EndDate);
+  const days_between = Math.round((end.getTime() - start.getTime()) / (1000 * 3600 * 24));
+  return(days_between);
 }
-
 
 export default function Home({ FestivalData }) {
   const [mounted, setMounted] = useState(false)
@@ -67,13 +68,15 @@ export default function Home({ FestivalData }) {
       </Head>
 
       <main>
-	  <button className="left-0 w-full text-right text-xl lg:text-2xl">
+	<div className="w-full">
+	  <button className="float-right text-xl lg:text-2xl">
 	  { theme === "light" ? (
 	    <FontAwesomeIcon icon={faSun} onClick={() => setTheme('dark')}/>
 	  ):(
 	    <FontAwesomeIcon icon={faMoon} onClick={() => setTheme('light')}/>
 	  )}
 	  </button>
+	</div>
         <h1 className="title text-center m-0 text-5xl md:text-6xl lg:text-7xl">
           whenfestival?
         </h1>
@@ -81,11 +84,11 @@ export default function Home({ FestivalData }) {
         <div className="grid">
 	  {FestivalData.map(({ id, name, url, start, end, country, address, flag, maps, image, image_black }) => (
             <a href={url} className="card max-w-2xl">
-	      <div className="inline-block align-middle py-4 w-3/12 text-center">
+	      <div className="inline-block align-middle pr-2 lg:pr-0 py-4 lg:py-0 w-3/12 text-center">
 		<Image
 		  src={image}
-		  width={120}
-		  height={120}
+		  width={130}
+		  height={130}
 		  style={
 	            theme === "dark" && image_black ?
 		      {filter:"invert(100%)"}
@@ -94,14 +97,13 @@ export default function Home({ FestivalData }) {
 	          }
 		      
 		/>
-		<br/>
-                <p className="text-xs md:text-base">
-		  in {daysBetween(Date.now(),start)} days
-		</p>
 	      </div>
-	      <div className="inline-block align-middle p-2 w-9/12">
-		<p className="float-right text-xs sm:text-sm md:text-lg lg:text-xl"> {country} &nbsp; {flag} </p>
-	        <p className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">{name}</p>
+	      <div className="inline-block align-middle lg:pl-2 py-2 w-9/12">
+		<CountdownTimer targetDate={start} className="float-right font-mono"/>
+		<div>
+		  <p className="float-left text-xs sm:text-sm"> {country} &nbsp; {flag} </p>
+	          <p className="clear-left font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">{name}</p>
+		</div>
 	        <p className="text-xs md:text-base lg:text-lg">
 	          {parseDate(start)} - {parseDate(end)}
 		  <br/>
@@ -110,14 +112,15 @@ export default function Home({ FestivalData }) {
 		    daysBetween(start,end) + 1 + ' days'
 		  } long
 		  <br/>
-		  {address}&nbsp;
+		  {address}&nbsp;(
 	          <a
 		    className="inline underline"
 		    href={maps}
 		    target="_blank"
 		  >
-	            (Maps)
+	            Maps
 		  </a>
+	          )
 		</p>
 	      </div>
 	    </a>
