@@ -63,11 +63,13 @@ footer {
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+@media (hover: hover) {
+  .card:hover,
+  .card:focus,
+  .card:active {
+    color: #7c50ea;
+    border-color: #7c50ea;
+  }
 }
 
 .card h3 {

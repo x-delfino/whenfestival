@@ -124,7 +124,10 @@ export default function Home({ FestivalData }) {
 
       <footer>
 	<p className="text-sm md:text-base px-4">
-	  made with love by delfino for paul. checkout&nbsp;
+	  made with love by delfino for paul.
+	</p>
+	<p className="text-sm md:text-base">
+	  checkout&nbsp;
           <a
             href="https://github.com/x-delfino/whenfestival"
             target="_blank"
