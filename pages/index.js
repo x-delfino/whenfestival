@@ -95,13 +95,12 @@ export default function Home({ FestivalData }) {
 		    :
 		      {filter:"none"}
 	          }
-		      
 		/>
 	      </div>
 	      <div className="inline-block align-middle lg:pl-2 py-2 w-9/12">
 		<CountdownTimer targetDate={start} className="float-right font-mono"/>
 		<div>
-		  <p className="float-left text-xs sm:text-sm"> {country} &nbsp; {flag} </p>
+		  <p className="float-left text-xs sm:text-sm"> {flag} {country} </p>
 	          <p className="clear-left font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">{name}</p>
 		</div>
 	        <p className="text-xs md:text-base lg:text-lg">
