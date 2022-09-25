@@ -105,7 +105,10 @@ export default function Home({ FestivalData }) {
 	        <p className="text-xs md:text-base lg:text-lg">
 	          {parseDate(start)} - {parseDate(end)}
 		  <br/>
-        	  {daysBetween(start,end) + 1} day/s long
+        	  {daysBetween(start,end) === 0 ?
+		    daysBetween(start,end) + 1 + ' day':
+		    daysBetween(start,end) + 1 + ' days'
+		  } long
 		  <br/>
 		  {address}&nbsp;
 	          <a
